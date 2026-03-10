@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Restaurant Theme (default) */
+    --background: 30 33% 97%;
+    --foreground: 20 10% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 10% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 10% 12%;
+
+    --primary: 352 43% 32%;
+    --primary-foreground: 30 33% 97%;
+
+    --secondary: 35 35% 64%;
+    --secondary-foreground: 20 10% 12%;
+
+    --muted: 30 20% 92%;
+    --muted-foreground: 20 8% 46%;
+
+    --accent: 35 35% 64%;
+    --accent-foreground: 20 10% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 352 43% 32%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 30 20% 96%;
+    --sidebar-foreground: 20 10% 20%;
+    --sidebar-primary: 352 43% 32%;
+    --sidebar-primary-foreground: 30 33% 97%;
+    --sidebar-accent: 30 20% 92%;
+    --sidebar-accent-foreground: 20 10% 20%;
+    --sidebar-border: 30 15% 88%;
+    --sidebar-ring: 352 43% 32%;
+
+    /* Custom tokens */
+    --aura-gold: 35 35% 64%;
+    --aura-wine: 352 43% 32%;
+    --aura-cream: 30 33% 97%;
+    --aura-warm: 30 20% 92%;
+    --aura-success: 152 60% 40%;
+    --aura-info: 210 70% 50%;
+    --aura-warning: 38 90% 55%;
+
+    --card-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    --card-shadow-hover: 0 8px 24px rgba(0,0,0,0.1);
+    --card-radius: 16px;
+    --card-size: 108px;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 20 10% 8%;
+    --foreground: 30 15% 90%;
+
+    --card: 20 10% 12%;
+    --card-foreground: 30 15% 90%;
+
+    --popover: 20 10% 12%;
+    --popover-foreground: 30 15% 90%;
+
+    --primary: 352 43% 45%;
+    --primary-foreground: 30 33% 97%;
+
+    --secondary: 35 30% 50%;
+    --secondary-foreground: 30 15% 90%;
+
+    --muted: 20 10% 18%;
+    --muted-foreground: 20 8% 60%;
+
+    --accent: 35 30% 50%;
+    --accent-foreground: 30 15% 90%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 20 10% 22%;
+    --input: 20 10% 22%;
+    --ring: 352 43% 45%;
+
+    --sidebar-background: 20 10% 10%;
+    --sidebar-foreground: 30 15% 85%;
+    --sidebar-primary: 352 43% 45%;
+    --sidebar-primary-foreground: 30 33% 97%;
+    --sidebar-accent: 20 10% 18%;
+    --sidebar-accent-foreground: 30 15% 85%;
+    --sidebar-border: 20 10% 22%;
+    --sidebar-ring: 352 43% 45%;
+
+    --aura-gold: 35 35% 55%;
+    --aura-wine: 352 43% 45%;
+    --aura-cream: 20 10% 12%;
+    --aura-warm: 20 10% 18%;
+    --aura-success: 152 55% 45%;
+    --aura-info: 210 65% 55%;
+    --aura-warning: 38 85% 55%;
+
+    --card-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    --card-shadow-hover: 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  /* Hotel Theme */
+  .theme-hotel {
+    --background: 0 0% 100%;
+    --foreground: 210 30% 15%;
+    --primary: 210 35% 17%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 38 30% 56%;
+    --secondary-foreground: 210 30% 15%;
+    --muted: 210 15% 95%;
+    --muted-foreground: 210 10% 46%;
+    --accent: 38 30% 56%;
+    --accent-foreground: 210 30% 15%;
+    --border: 210 15% 90%;
+    --input: 210 15% 90%;
+    --ring: 210 35% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 15%;
+    --aura-gold: 38 30% 56%;
+    --aura-wine: 210 35% 17%;
+  }
+
+  /* Lounge Theme */
+  .theme-lounge {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+    --primary: 270 30% 17%;
+    --primary-foreground: 0 0% 95%;
+    --secondary: 338 100% 53%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 270 10% 15%;
+    --muted-foreground: 270 5% 60%;
+    --accent: 338 100% 53%;
+    --accent-foreground: 0 0% 100%;
+    --border: 270 10% 20%;
+    --input: 270 10% 20%;
+    --ring: 338 100% 53%;
+    --card: 270 10% 12%;
+    --card-foreground: 0 0% 95%;
+    --aura-gold: 338 100% 53%;
+    --aura-wine: 270 30% 17%;
+  }
+
+  /* Ocean Theme */
+  .theme-ocean {
+    --background: 195 20% 96%;
+    --foreground: 195 30% 12%;
+    --primary: 185 50% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 42 40% 70%;
+    --secondary-foreground: 195 30% 12%;
+    --muted: 195 15% 90%;
+    --muted-foreground: 195 10% 46%;
+    --accent: 42 40% 70%;
+    --accent-foreground: 195 30% 12%;
+    --border: 195 15% 85%;
+    --input: 195 15% 85%;
+    --ring: 185 50% 28%;
+    --card: 0 0% 100%;
+    --card-foreground: 195 30% 12%;
+    --aura-gold: 42 40% 70%;
+    --aura-wine: 185 50% 28%;
+  }
+
+  /* Forest Theme */
+  .theme-forest {
+    --background: 90 15% 96%;
+    --foreground: 150 25% 12%;
+    --primary: 150 40% 22%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 35% 55%;
+    --secondary-foreground: 150 25% 12%;
+    --muted: 100 12% 90%;
+    --muted-foreground: 120 10% 46%;
+    --accent: 30 35% 55%;
+    --accent-foreground: 150 25% 12%;
+    --border: 100 12% 85%;
+    --input: 100 12% 85%;
+    --ring: 150 40% 22%;
+    --card: 0 0% 100%;
+    --card-foreground: 150 25% 12%;
+    --aura-gold: 30 35% 55%;
+    --aura-wine: 150 40% 22%;
+  }
+
+  /* Sunset Theme */
+  .theme-sunset {
+    --background: 30 30% 97%;
+    --foreground: 12 30% 12%;
+    --primary: 12 70% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 80% 55%;
+    --secondary-foreground: 12 30% 12%;
+    --muted: 25 20% 92%;
+    --muted-foreground: 15 10% 46%;
+    --accent: 35 80% 55%;
+    --accent-foreground: 12 30% 12%;
+    --border: 25 15% 88%;
+    --input: 25 15% 88%;
+    --ring: 12 70% 50%;
+    --card: 0 0% 100%;
+    --card-foreground: 12 30% 12%;
+    --aura-gold: 35 80% 55%;
+    --aura-wine: 12 70% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .aura-card {
+    width: var(--card-size);
+    height: var(--card-size);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 8px;
+    transition: all 0.2s ease;
+    @apply bg-card text-card-foreground flex flex-col items-center justify-center gap-1 cursor-pointer;
+  }
+  .aura-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+  }
+  .aura-card-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .aura-card-desc {
+    font-size: 11px;
+    font-weight: 400;
+    @apply text-muted-foreground;
+    text-align: center;
+  }
+  .aura-action-btn {
+    @apply flex flex-col items-center gap-1 text-xs font-medium;
+    min-width: 60px;
+  }
+  .aura-action-btn .icon-wrap {
+    @apply w-10 h-10 rounded-full flex items-center justify-center bg-primary text-primary-foreground;
+  }
+  .aura-section-title {
+    font-family: var(--font-display);
+    @apply text-lg font-semibold;
+  }
+  .aura-badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  .aura-badge-gold {
+    background: hsl(var(--aura-gold) / 0.15);
+    color: hsl(var(--aura-gold));
+  }
+  .aura-badge-success {
+    background: hsl(var(--aura-success) / 0.15);
+    color: hsl(var(--aura-success));
+  }
+  .aura-badge-info {
+    background: hsl(var(--aura-info) / 0.15);
+    color: hsl(var(--aura-info));
+  }
+  .aura-badge-warning {
+    background: hsl(var(--aura-warning) / 0.15);
+    color: hsl(var(--aura-warning));
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+}
