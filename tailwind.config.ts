@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         display: ["'Playfair Display'", "serif"],
-        body: ["'DM Sans'", "system-ui", "sans-serif"],
+        body: ["'Inter'", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -69,13 +69,6 @@ export default {
           success: "hsl(var(--aura-success))",
           info: "hsl(var(--aura-info))",
           warning: "hsl(var(--aura-warning))",
-        },
-        tourism: {
-          navy: "hsl(var(--tourism-navy))",
-          gold: "hsl(var(--tourism-gold))",
-          sky: "hsl(var(--tourism-sky))",
-          coral: "hsl(var(--tourism-coral))",
-          sage: "hsl(var(--tourism-sage))",
         },
       },
       borderRadius: {
