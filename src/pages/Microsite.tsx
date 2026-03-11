@@ -1,17 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import {
   Phone, MessageCircle, Navigation, Share2, Bookmark,
-  Camera, Star, Info, Bot, Award, Users, HelpCircle, CalendarDays, Globe,
-  Gamepad2, Link2, Handshake,
+  Camera, Star, Info, Bot, Users, HelpCircle,
   Landmark, Compass, Hotel, TreePine, Map, Train,
-  HelpingHand, Store, Tag, Megaphone, Palette,
-  MapPin, Calendar, Leaf, UtensilsCrossed,
+  Store, Tag, Palette, UtensilsCrossed, Calendar,
+  Leaf, Gamepad2, MapPin,
 } from "lucide-react";
 import DestinationHeader from "@/components/aura/DestinationHeader";
 import ActionButton from "@/components/aura/ActionButton";
 import AuraCard from "@/components/aura/AuraCard";
 import BottomBrandBar from "@/components/aura/BottomBrandBar";
 import AuraSupermenu from "@/components/aura/AuraSupermenu";
+import { motion } from "framer-motion";
+
+import attractionAquarium from "@/assets/attraction-aquarium.jpg";
+import eventJazz from "@/assets/event-jazz.jpg";
+import photoBeltline from "@/assets/photo-beltline.jpg";
+import restaurantBbq from "@/assets/restaurant-bbq.jpg";
 
 const actions = [
   { icon: Phone, label: "Call" },
@@ -21,68 +26,54 @@ const actions = [
   { icon: Bookmark, label: "Save" },
 ];
 
+/* ── Consolidated cards: 28 → 12 ── */
 const cards = [
-  { icon: Landmark, title: "Attractions", subtitle: "Museums & sites", color: "hsl(var(--primary))" },
-  { icon: Compass, title: "Things To Do", subtitle: "Tours & more", color: "hsl(var(--primary))" },
-  { icon: Calendar, title: "Events & Festivals", subtitle: "What's on", color: "hsl(var(--aura-warning))" },
-  { icon: UtensilsCrossed, title: "Local Cuisine", subtitle: "Food guide", color: "hsl(var(--primary))" },
-  { icon: Hotel, title: "Hotels & Stays", subtitle: "Book now", color: "hsl(var(--aura-info))" },
-  { icon: Palette, title: "Cultural Experiences", subtitle: "Arts & culture", color: "hsl(var(--secondary))" },
-  { icon: TreePine, title: "Nature & Parks", subtitle: "Outdoors", color: "hsl(var(--aura-success))" },
-  { icon: MapPin, title: "Neighborhood Guide", subtitle: "Districts", color: "hsl(var(--primary))" },
-  { icon: Train, title: "Transportation", subtitle: "Getting around", color: "hsl(var(--aura-info))" },
-  { icon: Users, title: "Tour Guides", subtitle: "Expert guides", color: "hsl(var(--primary))" },
-  { icon: Camera, title: "Photo Memories", subtitle: "PicPop", color: "hsl(var(--primary))" },
-  { icon: Star, title: "Traveler Reviews", subtitle: "4.9 avg", color: "hsl(var(--aura-warning))" },
-  { icon: Award, title: "Top Experiences", subtitle: "Must-do", color: "hsl(var(--aura-warning))" },
-  { icon: Info, title: "About Us", subtitle: "Our story", color: "hsl(var(--primary))" },
-  { icon: Bot, title: "AI Travel Assistant", subtitle: "Ask anything", color: "hsl(var(--aura-info))" },
-  { icon: HelpingHand, title: "VIP Experiences", subtitle: "Premium", color: "hsl(var(--secondary))" },
-  { icon: HelpCircle, title: "Travel FAQs", subtitle: "24 answers", color: "hsl(var(--primary))" },
-  { icon: CalendarDays, title: "Upcoming Tours", subtitle: "Book now", color: "hsl(var(--aura-success))" },
-  { icon: Store, title: "Local Businesses", subtitle: "Shop local", color: "hsl(var(--aura-warning))" },
-  { icon: Tag, title: "Deals & Packages", subtitle: "Promotions", color: "hsl(var(--aura-success))" },
-  { icon: Megaphone, title: "Local Creators", subtitle: "Influencers", color: "hsl(var(--secondary))" },
-  { icon: Globe, title: "Social Links", subtitle: "Follow us", color: "hsl(var(--primary))" },
-  { icon: Gamepad2, title: "Spin & Win", subtitle: "Win prizes", color: "hsl(var(--aura-warning))" },
-  { icon: Link2, title: "Refer a Traveler", subtitle: "Earn rewards", color: "hsl(var(--aura-info))" },
-  { icon: Handshake, title: "Travel Partners", subtitle: "Affiliate", color: "hsl(var(--primary))" },
-  { icon: Compass, title: "Plan Your Trip", subtitle: "Itineraries", color: "hsl(var(--aura-info))" },
-  { icon: Bot, title: "AI Trip Planner", subtitle: "Ask AI", color: "hsl(var(--aura-info))" },
-  { icon: Leaf, title: "Sustainability", subtitle: "Eco travel", color: "hsl(var(--aura-success))" },
+  { icon: Landmark,        title: "Things To Do",        subtitle: "Attractions & tours",   color: "hsl(var(--primary))" },
+  { icon: Calendar,        title: "Events & Festivals",  subtitle: "What's happening",      color: "hsl(var(--aura-warning))" },
+  { icon: UtensilsCrossed, title: "Food & Dining",       subtitle: "Restaurants & cuisine",  color: "hsl(var(--primary))" },
+  { icon: Hotel,           title: "Hotels & Stays",      subtitle: "Accommodations",         color: "hsl(var(--aura-info))" },
+  { icon: MapPin,          title: "Neighborhoods",       subtitle: "Explore districts",      color: "hsl(var(--primary))" },
+  { icon: TreePine,        title: "Nature & Outdoors",   subtitle: "Parks & trails",         color: "hsl(var(--aura-success))" },
+  { icon: Train,           title: "Getting Around",      subtitle: "Transit & parking",      color: "hsl(var(--aura-info))" },
+  { icon: Compass,         title: "Plan Your Trip",      subtitle: "AI itinerary builder",   color: "hsl(var(--aura-info))" },
+  { icon: Camera,          title: "Photo Memories",      subtitle: "Capture & share",        color: "hsl(var(--primary))" },
+  { icon: Tag,             title: "Deals & Rewards",     subtitle: "Packages & prizes",      color: "hsl(var(--aura-success))" },
+  { icon: Info,            title: "Visitor Info",         subtitle: "FAQs, about & more",     color: "hsl(var(--primary))" },
+  { icon: Users,           title: "Community",           subtitle: "Creators & social",       color: "hsl(var(--secondary))" },
 ];
 
 const routes: Record<string, string> = {
-  "Attractions": "/destination/attractions",
-  "Things To Do": "/destination/things-to-do",
+  "Things To Do":       "/destination/attractions",
   "Events & Festivals": "/destination/events-festivals",
-  "Local Cuisine": "/microsite/menu",
-  "Hotels & Stays": "/destination/hotels",
-  "Cultural Experiences": "/destination/culture",
-  "Nature & Parks": "/destination/nature",
-  "Neighborhood Guide": "/destination/neighborhoods",
-  "Transportation": "/destination/transportation",
-  "Tour Guides": "/microsite/staff",
-  "Photo Memories": "/destination/photos",
-  "Traveler Reviews": "/microsite/reviews",
-  "Top Experiences": "/microsite/popular-dishes",
-  "About Us": "/microsite/details",
-  "AI Travel Assistant": "/microsite/concierge",
-  "VIP Experiences": "/microsite/private-dining",
-  "Travel FAQs": "/microsite/faqs",
-  "Upcoming Tours": "/microsite/events",
-  "Local Businesses": "/destination/local-businesses",
-  "Deals & Packages": "/destination/deals",
-  "Local Creators": "/destination/creators",
-  "Social Links": "/microsite/social-links",
-  "Spin & Win": "/microsite/freebie-game",
-  "Refer a Traveler": "/microsite/referral",
-  "Travel Partners": "/microsite/affiliate",
-  "Plan Your Trip": "/destination/plan-trip",
-  "AI Trip Planner": "/destination/ai-planner",
-  "Sustainability": "/destination/sustainability",
-  "Awards": "/microsite/awards",
+  "Food & Dining":      "/microsite/menu",
+  "Hotels & Stays":     "/destination/hotels",
+  "Neighborhoods":      "/destination/neighborhoods",
+  "Nature & Outdoors":  "/destination/nature",
+  "Getting Around":     "/destination/transportation",
+  "Plan Your Trip":     "/destination/plan-trip",
+  "Photo Memories":     "/destination/photos",
+  "Deals & Rewards":    "/destination/deals",
+  "Visitor Info":       "/microsite/faqs",
+  "Community":          "/destination/creators",
 };
+
+/* ── Quick category chips ── */
+const quickCategories = [
+  { label: "Museums",  icon: Landmark, route: "/destination/attractions" },
+  { label: "Outdoors", icon: TreePine,  route: "/destination/nature" },
+  { label: "Nightlife",icon: Star,      route: "/destination/things-to-do" },
+  { label: "Family",   icon: Users,     route: "/destination/things-to-do" },
+  { label: "Culture",  icon: Palette,   route: "/destination/culture" },
+  { label: "Shopping", icon: Store,     route: "/destination/local-businesses" },
+];
+
+/* ── Featured content ── */
+const featured = [
+  { title: "Georgia Aquarium",    image: attractionAquarium, route: "/destination/attractions" },
+  { title: "Atlanta Jazz Festival",image: eventJazz,         route: "/destination/events-festivals" },
+  { title: "The BeltLine Trail",  image: photoBeltline,      route: "/destination/nature" },
+  { title: "Southern BBQ Tour",   image: restaurantBbq,      route: "/microsite/menu" },
+];
 
 const Microsite = () => {
   const navigate = useNavigate();
@@ -91,13 +82,55 @@ const Microsite = () => {
     <div className="min-h-screen bg-background max-w-[430px] mx-auto">
       <DestinationHeader />
 
+      {/* Action buttons */}
       <div className="flex gap-2 overflow-x-auto px-4 py-4 no-scrollbar">
         {actions.map((btn) => (
           <ActionButton key={btn.label} icon={btn.icon} label={btn.label} />
         ))}
       </div>
 
+      {/* Quick Category Links */}
+      <div className="px-4 pb-3">
+        <div className="flex gap-2 overflow-x-auto no-scrollbar">
+          {quickCategories.map((cat) => (
+            <button
+              key={cat.label}
+              onClick={() => navigate(cat.route)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-xs font-medium text-primary whitespace-nowrap shrink-0 hover:bg-primary/20 transition-colors"
+            >
+              <cat.icon className="w-3.5 h-3.5" />
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Featured Content Grid */}
       <div className="px-4 pb-4">
+        <h2 className="text-sm font-display font-semibold mb-2 text-foreground">Featured</h2>
+        <div className="grid grid-cols-2 gap-2">
+          {featured.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              onClick={() => navigate(item.route)}
+              className="relative rounded-xl overflow-hidden aspect-[4/3] cursor-pointer group"
+            >
+              <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              <span className="absolute bottom-2 left-2.5 right-2.5 text-[11px] font-semibold text-white leading-tight">
+                {item.title}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Cards Grid */}
+      <div className="px-4 pb-4">
+        <h2 className="text-sm font-display font-semibold mb-2 text-foreground">Explore</h2>
         <div className="grid grid-cols-3 gap-3">
           {cards.map((card, i) => (
             <AuraCard
