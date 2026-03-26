@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion, Reorder } from "framer-motion";
 import {
-  Camera, UtensilsCrossed, Star, Info, Wine, Sparkles, Bot, Award, Users,
+  Landmark, Calendar, UtensilsCrossed, Hotel, Compass, Tag, Train, Palette,
+  Wine, Trophy, TreePine, Baby, Camera, Gamepad2, HelpCircle, Users,
   GripVertical, Eye, EyeOff, Pencil, Check, X, Save, LayoutGrid, Type,
-  ChevronRight, HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake,
+  ChevronRight,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
