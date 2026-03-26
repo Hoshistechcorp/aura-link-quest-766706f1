@@ -33,13 +33,13 @@ export interface MicrositeCard {
 /* ── All 16 cards (mirrors microsite modules) ─────── */
 const defaultCards: MicrositeCard[] = [
   { id: "1",  title: "Attractions",      subtitle: "Sights, museums & tours",    icon: "Landmark",        path: "/destination/attractions",      visible: true,  color: "hsl(var(--primary))" },
-  { id: "2",  title: "Events",           subtitle: "Calendar & tickets",         icon: "Calendar",        path: "/destination/events-festivals",  visible: true,  color: "hsl(var(--aura-warning))" },
+  { id: "2",  title: "Events & Festivals", subtitle: "Calendar & tickets",         icon: "Calendar",        path: "/destination/events-festivals",  visible: true,  color: "hsl(var(--aura-warning))" },
   { id: "3",  title: "Dining",           subtitle: "Restaurants & food tours",   icon: "UtensilsCrossed", path: "/microsite/menu",               visible: true,  color: "hsl(var(--primary))" },
   { id: "4",  title: "Hotels & Stays",   subtitle: "Book & compare",            icon: "Hotel",           path: "/destination/hotels",            visible: true,  color: "hsl(var(--aura-info))" },
   { id: "5",  title: "Plan Your Trip",   subtitle: "Itinerary builder",         icon: "Compass",         path: "/destination/plan-trip",         visible: true,  color: "hsl(var(--aura-info))" },
   { id: "6",  title: "Deals & Packages", subtitle: "Offers & bundles",          icon: "Tag",             path: "/destination/deals",             visible: true,  color: "hsl(var(--aura-success))" },
   { id: "7",  title: "Getting Around",   subtitle: "Transit, parking & bikes",  icon: "Train",           path: "/destination/transportation",    visible: true,  color: "hsl(var(--aura-info))" },
-  { id: "8",  title: "Arts & Culture",   subtitle: "Museums, theater & art",    icon: "Palette",         path: "/destination/culture",           visible: true,  color: "hsl(var(--secondary))" },
+  { id: "8",  title: "Cultural Experiences", subtitle: "Museums, theater & art",    icon: "Palette",         path: "/destination/culture",           visible: true,  color: "hsl(var(--secondary))" },
   { id: "9",  title: "Nightlife",        subtitle: "Bars, clubs & live music",  icon: "Wine",            path: "/destination/things-to-do",      visible: true,  color: "hsl(var(--secondary))" },
   { id: "10", title: "Sports",           subtitle: "Stadiums & fan zones",      icon: "Trophy",          path: "/destination/things-to-do",      visible: true,  color: "hsl(var(--aura-warning))" },
   { id: "11", title: "Nature & Eco",     subtitle: "Parks & sustainability",    icon: "TreePine",        path: "/destination/nature",            visible: true,  color: "hsl(var(--aura-success))" },

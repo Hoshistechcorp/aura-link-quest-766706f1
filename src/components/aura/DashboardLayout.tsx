@@ -39,7 +39,7 @@ const navSections: NavSection[] = [
     defaultOpen: true,
     items: [
       { icon: Landmark, label: "Attractions", path: "/destination/attractions" },
-      { icon: CalendarDays, label: "Events", path: "/destination/events-festivals" },
+      { icon: CalendarDays, label: "Events & Festivals", path: "/destination/events-festivals" },
       { icon: UtensilsCrossed, label: "Dining", path: "/microsite/menu" },
       { icon: Hotel, label: "Hotels & Stays", path: "/destination/hotels" },
       { icon: Compass, label: "Plan Your Trip", path: "/destination/plan-trip" },
@@ -50,7 +50,7 @@ const navSections: NavSection[] = [
     title: "Experiences",
     defaultOpen: false,
     items: [
-      { icon: Palette, label: "Arts & Culture", path: "/destination/culture" },
+      { icon: Palette, label: "Cultural Experiences", path: "/destination/culture" },
       { icon: Wine, label: "Nightlife", path: "/destination/things-to-do" },
       { icon: Trophy, label: "Sports", path: "/dashboard/tourism-gamification" },
       { icon: TreePine, label: "Nature & Eco", path: "/destination/nature" },
