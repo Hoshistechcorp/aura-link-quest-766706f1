@@ -30,13 +30,13 @@ const actions = [
 /* ── Consolidated Module Cards ── */
 const cards = [
   { icon: Landmark,        title: "Attractions",          subtitle: "Sights, museums & tours",       color: "hsl(var(--primary))" },
-  { icon: Calendar,        title: "Events",               subtitle: "Calendar & tickets",            color: "hsl(var(--aura-warning))" },
+  { icon: Calendar,        title: "Events & Festivals",   subtitle: "Calendar & tickets",            color: "hsl(var(--aura-warning))" },
   { icon: UtensilsCrossed, title: "Dining",               subtitle: "Restaurants & food tours",      color: "hsl(var(--primary))" },
   { icon: Hotel,           title: "Hotels & Stays",       subtitle: "Book & compare",                color: "hsl(var(--aura-info))" },
   { icon: Compass,         title: "Plan Your Trip",       subtitle: "Itinerary builder",             color: "hsl(var(--aura-info))" },
   { icon: Tag,             title: "Deals & Packages",     subtitle: "Offers & bundles",              color: "hsl(var(--aura-success))" },
   { icon: Train,           title: "Getting Around",       subtitle: "Transit, parking & bikes",      color: "hsl(var(--aura-info))" },
-  { icon: Palette,         title: "Arts & Culture",       subtitle: "Museums, theater & art",        color: "hsl(var(--secondary))" },
+  { icon: Palette,         title: "Cultural Experiences", subtitle: "Museums, theater & art",        color: "hsl(var(--secondary))" },
   { icon: Wine,            title: "Nightlife",            subtitle: "Bars, clubs & live music",      color: "hsl(var(--secondary))" },
   { icon: Trophy,          title: "Sports",               subtitle: "Stadiums & fan zones",          color: "hsl(var(--aura-warning))" },
   { icon: TreePine,        title: "Nature & Eco",         subtitle: "Parks & sustainability",        color: "hsl(var(--aura-success))" },
