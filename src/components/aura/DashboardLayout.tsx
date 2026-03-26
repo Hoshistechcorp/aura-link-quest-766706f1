@@ -50,7 +50,7 @@ const navSections: NavSection[] = [
     title: "Experiences",
     defaultOpen: false,
     items: [
-      { icon: Palette, label: "Arts & Culture", path: "/destination/culture" },
+      { icon: Palette, label: "Cultural Experiences", path: "/destination/culture" },
       { icon: Wine, label: "Nightlife", path: "/destination/things-to-do" },
       { icon: Trophy, label: "Sports", path: "/dashboard/tourism-gamification" },
       { icon: TreePine, label: "Nature & Eco", path: "/destination/nature" },
