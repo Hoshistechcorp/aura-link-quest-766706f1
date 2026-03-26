@@ -39,7 +39,7 @@ const navSections: NavSection[] = [
     defaultOpen: true,
     items: [
       { icon: Landmark, label: "Attractions", path: "/destination/attractions" },
-      { icon: CalendarDays, label: "Events", path: "/destination/events-festivals" },
+      { icon: CalendarDays, label: "Events & Festivals", path: "/destination/events-festivals" },
       { icon: UtensilsCrossed, label: "Dining", path: "/microsite/menu" },
       { icon: Hotel, label: "Hotels & Stays", path: "/destination/hotels" },
       { icon: Compass, label: "Plan Your Trip", path: "/destination/plan-trip" },
