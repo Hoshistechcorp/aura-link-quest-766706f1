@@ -34,7 +34,7 @@ const revenueData = [
 const products = [
   { id: "gift", label: "Gift Cards", icon: Gift, commission: "8%", links: 42 },
   { id: "dining", label: "Dining Experiences", icon: CalendarDays, commission: "12%", links: 28 },
-  { id: "events", label: "Events", icon: Ticket, commission: "10%", links: 19 },
+  { id: "events", label: "Events & Festivals", icon: Ticket, commission: "10%", links: 19 },
   { id: "merch", label: "Merchandise", icon: ShoppingBag, commission: "15%", links: 11 },
 ];
 
