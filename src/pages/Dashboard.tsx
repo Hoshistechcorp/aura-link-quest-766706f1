@@ -27,16 +27,18 @@ const engagementData = [
 
 const metrics = [
   { label: "Page Views", value: "12,847", change: "+18%", icon: Eye },
-  { label: "Tour Bookings", value: "4,231", change: "+24%", icon: MousePointer },
-  { label: "Top Tour", value: "BeltLine", change: "68% clicks", icon: TrendingUp },
-  { label: "Plan", value: "Pro", change: "Active", icon: CreditCard },
+  { label: "Attractions Visited", value: "4,231", change: "+24%", icon: MousePointer },
+  { label: "Event Tickets", value: "1,892", change: "+31%", icon: TrendingUp },
+  { label: "Active Modules", value: "16", change: "All Live", icon: CreditCard },
 ];
 
 const activities = [
-  { text: "New review from Sarah M. ⭐⭐⭐⭐⭐", time: "2m ago" },
-  { text: "BeltLine tour booked 14 times today", time: "15m ago" },
-  { text: "Travel Gallery: 3 new uploads", time: "1h ago" },
-  { text: "AI Travel Assistant answered 28 questions", time: "2h ago" },
+  { text: "New review on Attractions ⭐⭐⭐⭐⭐", time: "2m ago" },
+  { text: "Events module: Jazz Festival trending", time: "15m ago" },
+  { text: "Dining module: 8 new restaurant listings", time: "1h ago" },
+  { text: "Gamification: 142 spins today", time: "2h ago" },
+  { text: "Hotels & Stays: 26 bookings this week", time: "3h ago" },
+  { text: "Photo & Video gallery: 12 new uploads", time: "5h ago" },
 ];
 
 
