@@ -49,7 +49,7 @@ const cards = [
 
 const routes: Record<string, string> = {
   "Attractions":       "/destination/attractions",
-  "Events":            "/destination/events-festivals",
+  "Events & Festivals": "/destination/events-festivals",
   "Dining":            "/microsite/menu",
   "Hotels & Stays":    "/destination/hotels",
   "Plan Your Trip":    "/destination/plan-trip",
