@@ -74,7 +74,7 @@ const CardStudioPage = () => {
   };
 
   return (
-    <DashboardLayout title="Card Studio" subtitle="Customize your microsite card layout — pick up to 15 cards">
+    <DashboardLayout title="Card Studio" subtitle="Customize your microsite card layout — pick up to 16 modules">
       {/* Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div className="flex items-center gap-3">
