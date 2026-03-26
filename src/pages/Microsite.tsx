@@ -55,7 +55,7 @@ const routes: Record<string, string> = {
   "Plan Your Trip":    "/destination/plan-trip",
   "Deals & Packages":  "/destination/deals",
   "Getting Around":    "/destination/transportation",
-  "Arts & Culture":    "/destination/culture",
+  "Cultural Experiences": "/destination/culture",
   "Nightlife":         "/destination/things-to-do",
   "Sports":            "/destination/things-to-do",
   "Nature & Eco":      "/destination/nature",
