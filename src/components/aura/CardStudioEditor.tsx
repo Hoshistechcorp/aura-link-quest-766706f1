@@ -158,7 +158,7 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
         <ul className="space-y-2 text-xs text-muted-foreground">
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Drag cards to reorder how they appear</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Hide cards to remove from the public page</li>
-          <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Display up to 15 cards on your microsite</li>
+          <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Display up to 16 modules on your microsite</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Freebie Game drives daily visits</li>
         </ul>
       </div>
