@@ -35,7 +35,7 @@ const topReferrers = [
   { name: "Jessica W.", referrals: 24, conversions: 17, earned: "$340", avatar: "JW" },
 ];
 
-const rewardRules = [
+const defaultRules = [
   { id: 1, trigger: "First Referral Signup", referrerReward: "$10 credit", refereeReward: "$10 off first visit", active: true },
   { id: 2, trigger: "Referee's First Purchase", referrerReward: "Free appetizer", refereeReward: "10% off", active: true },
   { id: 3, trigger: "5 Successful Referrals", referrerReward: "Free entrée", refereeReward: "—", active: true },
@@ -44,10 +44,21 @@ const rewardRules = [
 
 const ReferralPage = () => {
   const [copied, setCopied] = useState(false);
+  const [rewardRules, setRewardRules] = useState(defaultRules);
+  const [ruleModal, setRuleModal] = useState(false);
+  const [ruleDraft, setRuleDraft] = useState({ trigger: "", referrerReward: "", refereeReward: "—", active: true });
 
   const handleCopy = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleAddRule = () => {
+    if (!ruleDraft.trigger.trim() || !ruleDraft.referrerReward.trim()) return;
+    setRewardRules((prev) => [...prev, { id: Date.now(), ...ruleDraft }]);
+    setRuleModal(false);
+    setRuleDraft({ trigger: "", referrerReward: "", refereeReward: "—", active: true });
+    toast({ title: "Reward rule added" });
   };
 
   return (
