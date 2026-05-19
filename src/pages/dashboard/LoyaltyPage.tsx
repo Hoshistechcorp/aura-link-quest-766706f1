@@ -228,7 +228,7 @@ const LoyaltyPage = () => {
           <div className="mt-6 p-5 rounded-2xl bg-card border">
             <h4 className="text-sm font-medium mb-4">Tier Progression</h4>
             <div className="space-y-4">
-              {tiers.map((tier, i) => (
+              {tierState.map((tier, i) => (
                 <div key={tier.id} className="flex items-center gap-3">
                   <div className={`w-8 h-8 rounded-lg ${tier.bgColor} flex items-center justify-center`}>
                     <tier.icon className={`w-4 h-4 ${tier.textColor}`} />
