@@ -192,6 +192,56 @@ const ReferralPage = () => {
           </table>
         </div>
       </div>
+
+      <Dialog open={ruleModal} onOpenChange={setRuleModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Reward Rule</DialogTitle>
+            <DialogDescription>Define what triggers a reward and what each party receives.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Trigger</label>
+              <input
+                value={ruleDraft.trigger}
+                onChange={(e) => setRuleDraft({ ...ruleDraft, trigger: e.target.value })}
+                placeholder="e.g. 3 Successful Referrals"
+                className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Referrer Reward</label>
+                <input
+                  value={ruleDraft.referrerReward}
+                  onChange={(e) => setRuleDraft({ ...ruleDraft, referrerReward: e.target.value })}
+                  placeholder="e.g. $20 credit"
+                  className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Referee Reward</label>
+                <input
+                  value={ruleDraft.refereeReward}
+                  onChange={(e) => setRuleDraft({ ...ruleDraft, refereeReward: e.target.value })}
+                  placeholder="e.g. 10% off"
+                  className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+            </div>
+            <label className="flex items-center gap-2 text-sm">
+              <Switch checked={ruleDraft.active} onCheckedChange={(v) => setRuleDraft({ ...ruleDraft, active: v })} />
+              <span className="text-xs text-muted-foreground">Active</span>
+            </label>
+          </div>
+          <DialogFooter>
+            <button onClick={() => setRuleModal(false)} className="px-4 py-2 rounded-xl bg-muted text-sm font-medium">Cancel</button>
+            <button onClick={handleAddRule} disabled={!ruleDraft.trigger.trim() || !ruleDraft.referrerReward.trim()} className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50">
+              Add Rule
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 };
