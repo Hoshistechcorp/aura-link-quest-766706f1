@@ -4,6 +4,7 @@ import {
   UserPlus, Crown, Shield, User, Pencil, Trash2, X, Check,
   Mail, MapPin, ChevronRight, Users2,
 } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 
@@ -100,45 +101,44 @@ const TeamPage = () => {
             </button>
           </div>
 
-          {/* Invite form */}
-          <AnimatePresence>
-            {showInvite && (
-              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                <div className="p-5 rounded-2xl bg-primary/5 border border-primary/20 mb-3">
-                  <h4 className="font-medium mb-3">Invite Team Member</h4>
-                  <div className="grid sm:grid-cols-3 gap-3 mb-3">
-                    <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1 block">Email</label>
-                      <input value={inviteForm.email} onChange={(e) => setInviteForm({ ...inviteForm, email: e.target.value })} placeholder="email@company.com" className="w-full px-3 py-2 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20" />
-                    </div>
-                    <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1 block">Role</label>
-                      <div className="flex gap-1">
-                        {(["manager", "staff"] as Role[]).map((r) => (
-                          <button key={r} onClick={() => setInviteForm({ ...inviteForm, role: r })} className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${inviteForm.role === r ? "bg-primary text-primary-foreground" : "bg-muted/50 text-muted-foreground"}`}>
-                            {r.charAt(0).toUpperCase() + r.slice(1)}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1 block">Location</label>
-                      <select value={inviteForm.location} onChange={(e) => setInviteForm({ ...inviteForm, location: e.target.value })} className="w-full px-3 py-2 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
-                        <option>Downtown</option>
-                        <option>Midtown</option>
-                        <option>Brooklyn</option>
-                        <option>All Locations</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="flex justify-end gap-2">
-                    <button onClick={() => setShowInvite(false)} className="px-4 py-2 rounded-xl bg-muted text-sm font-medium">Cancel</button>
-                    <button onClick={handleInvite} disabled={!inviteForm.email} className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50">Send Invite</button>
+          <Dialog open={showInvite} onOpenChange={setShowInvite}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Invite Team Member</DialogTitle>
+                <DialogDescription>Send an invitation to join your team.</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 py-2">
+                <div>
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Email</label>
+                  <input value={inviteForm.email} onChange={(e) => setInviteForm({ ...inviteForm, email: e.target.value })} placeholder="email@company.com" className="w-full px-3 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20" />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Role</label>
+                  <div className="flex gap-1">
+                    {(["manager", "staff"] as Role[]).map((r) => (
+                      <button key={r} onClick={() => setInviteForm({ ...inviteForm, role: r })} className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${inviteForm.role === r ? "bg-primary text-primary-foreground" : "bg-muted/50 text-muted-foreground"}`}>
+                        {r.charAt(0).toUpperCase() + r.slice(1)}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <div>
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Location</label>
+                  <select value={inviteForm.location} onChange={(e) => setInviteForm({ ...inviteForm, location: e.target.value })} className="w-full px-3 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                    <option>Downtown</option>
+                    <option>Midtown</option>
+                    <option>Brooklyn</option>
+                    <option>All Locations</option>
+                  </select>
+                </div>
+              </div>
+              <DialogFooter>
+                <button onClick={() => setShowInvite(false)} className="px-4 py-2 rounded-xl bg-muted text-sm font-medium">Cancel</button>
+                <button onClick={handleInvite} disabled={!inviteForm.email} className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50">Send Invite</button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
 
           {/* Members */}
           {team.map((member, i) => {

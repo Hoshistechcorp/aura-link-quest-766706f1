@@ -5,7 +5,18 @@ import {
   Cake, UtensilsCrossed, Wine, Sparkles, Trophy, Target,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+
+const rewardIconOptions = [
+  { name: "Cake", icon: Cake },
+  { name: "UtensilsCrossed", icon: UtensilsCrossed },
+  { name: "Wine", icon: Wine },
+  { name: "Star", icon: Star },
+  { name: "Gift", icon: Gift },
+  { name: "Sparkles", icon: Sparkles },
+];
 
 const tiers = [
   {
@@ -98,8 +109,25 @@ const tierColor = (tier: string) => {
 
 const LoyaltyPage = () => {
   const [selectedTier, setSelectedTier] = useState("gold");
+  const [tierState, setTierState] = useState(tiers);
+  const [rewardModal, setRewardModal] = useState(false);
+  const [rewardDraft, setRewardDraft] = useState({ label: "", desc: "", iconName: "Star" });
 
-  const activeTier = tiers.find((t) => t.id === selectedTier)!;
+  const activeTier = tierState.find((t) => t.id === selectedTier)!;
+
+  const handleAddReward = () => {
+    if (!rewardDraft.label.trim()) return;
+    const iconEntry = rewardIconOptions.find((o) => o.name === rewardDraft.iconName) || rewardIconOptions[0];
+    setTierState((prev) => prev.map((t) =>
+      t.id === selectedTier
+        ? { ...t, rewards: [...t.rewards, { icon: iconEntry.icon, label: rewardDraft.label, desc: rewardDraft.desc }] }
+        : t
+    ));
+    setRewardModal(false);
+    setRewardDraft({ label: "", desc: "", iconName: "Star" });
+    toast({ title: "Reward added", description: `Added to ${activeTier.name} tier.` });
+  };
+
 
   return (
     <DashboardLayout title="Loyalty & Rewards" subtitle="Manage your loyalty program tiers">
@@ -127,7 +155,7 @@ const LoyaltyPage = () => {
         <div className="lg:col-span-2">
           {/* Tier Selector */}
           <div className="flex gap-2 mb-5 overflow-x-auto no-scrollbar">
-            {tiers.map((tier) => (
+            {tierState.map((tier) => (
               <button
                 key={tier.id}
                 onClick={() => setSelectedTier(tier.id)}
@@ -189,7 +217,7 @@ const LoyaltyPage = () => {
                 ))}
               </div>
 
-              <button className="mt-4 flex items-center gap-2 px-4 py-2 rounded-xl bg-muted text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors">
+              <button onClick={() => setRewardModal(true)} className="mt-4 flex items-center gap-2 px-4 py-2 rounded-xl bg-muted text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors">
                 <Plus className="w-4 h-4" />
                 Add Reward
               </button>
@@ -200,7 +228,7 @@ const LoyaltyPage = () => {
           <div className="mt-6 p-5 rounded-2xl bg-card border">
             <h4 className="text-sm font-medium mb-4">Tier Progression</h4>
             <div className="space-y-4">
-              {tiers.map((tier, i) => (
+              {tierState.map((tier, i) => (
                 <div key={tier.id} className="flex items-center gap-3">
                   <div className={`w-8 h-8 rounded-lg ${tier.bgColor} flex items-center justify-center`}>
                     <tier.icon className={`w-4 h-4 ${tier.textColor}`} />
@@ -290,6 +318,59 @@ const LoyaltyPage = () => {
           </div>
         </div>
       </div>
+
+      <Dialog open={rewardModal} onOpenChange={setRewardModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Reward to {activeTier.name} Tier</DialogTitle>
+            <DialogDescription>Define a new perk members will receive at this tier.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Reward Name</label>
+              <input
+                value={rewardDraft.label}
+                onChange={(e) => setRewardDraft({ ...rewardDraft, label: e.target.value })}
+                placeholder="e.g. Free Dessert"
+                className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Description</label>
+              <input
+                value={rewardDraft.desc}
+                onChange={(e) => setRewardDraft({ ...rewardDraft, desc: e.target.value })}
+                placeholder="e.g. On your birthday month"
+                className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Icon</label>
+              <div className="flex gap-2 flex-wrap">
+                {rewardIconOptions.map((opt) => {
+                  const Ic = opt.icon;
+                  const sel = rewardDraft.iconName === opt.name;
+                  return (
+                    <button
+                      key={opt.name}
+                      onClick={() => setRewardDraft({ ...rewardDraft, iconName: opt.name })}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${sel ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
+                    >
+                      <Ic className="w-4 h-4" />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <button onClick={() => setRewardModal(false)} className="px-4 py-2 rounded-xl bg-muted text-sm font-medium">Cancel</button>
+            <button onClick={handleAddReward} disabled={!rewardDraft.label.trim()} className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50">
+              Add Reward
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 };

@@ -6,6 +6,9 @@ import {
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { Switch } from "@/components/ui/switch";
+import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 
 const metrics = [
@@ -32,7 +35,7 @@ const topReferrers = [
   { name: "Jessica W.", referrals: 24, conversions: 17, earned: "$340", avatar: "JW" },
 ];
 
-const rewardRules = [
+const defaultRules = [
   { id: 1, trigger: "First Referral Signup", referrerReward: "$10 credit", refereeReward: "$10 off first visit", active: true },
   { id: 2, trigger: "Referee's First Purchase", referrerReward: "Free appetizer", refereeReward: "10% off", active: true },
   { id: 3, trigger: "5 Successful Referrals", referrerReward: "Free entrée", refereeReward: "—", active: true },
@@ -41,10 +44,21 @@ const rewardRules = [
 
 const ReferralPage = () => {
   const [copied, setCopied] = useState(false);
+  const [rewardRules, setRewardRules] = useState(defaultRules);
+  const [ruleModal, setRuleModal] = useState(false);
+  const [ruleDraft, setRuleDraft] = useState({ trigger: "", referrerReward: "", refereeReward: "—", active: true });
 
   const handleCopy = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleAddRule = () => {
+    if (!ruleDraft.trigger.trim() || !ruleDraft.referrerReward.trim()) return;
+    setRewardRules((prev) => [...prev, { id: Date.now(), ...ruleDraft }]);
+    setRuleModal(false);
+    setRuleDraft({ trigger: "", referrerReward: "", refereeReward: "—", active: true });
+    toast({ title: "Reward rule added" });
   };
 
   return (
@@ -142,7 +156,7 @@ const ReferralPage = () => {
       <div className="p-5 rounded-2xl bg-card border">
         <div className="flex items-center justify-between mb-5">
           <h3 className="font-display font-semibold">Reward Rules</h3>
-          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-muted text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors">
+          <button onClick={() => setRuleModal(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-muted text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors">
             <Plus className="w-3.5 h-3.5" />
             Add Rule
           </button>
@@ -178,6 +192,56 @@ const ReferralPage = () => {
           </table>
         </div>
       </div>
+
+      <Dialog open={ruleModal} onOpenChange={setRuleModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Reward Rule</DialogTitle>
+            <DialogDescription>Define what triggers a reward and what each party receives.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Trigger</label>
+              <input
+                value={ruleDraft.trigger}
+                onChange={(e) => setRuleDraft({ ...ruleDraft, trigger: e.target.value })}
+                placeholder="e.g. 3 Successful Referrals"
+                className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Referrer Reward</label>
+                <input
+                  value={ruleDraft.referrerReward}
+                  onChange={(e) => setRuleDraft({ ...ruleDraft, referrerReward: e.target.value })}
+                  placeholder="e.g. $20 credit"
+                  className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Referee Reward</label>
+                <input
+                  value={ruleDraft.refereeReward}
+                  onChange={(e) => setRuleDraft({ ...ruleDraft, refereeReward: e.target.value })}
+                  placeholder="e.g. 10% off"
+                  className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                />
+              </div>
+            </div>
+            <label className="flex items-center gap-2 text-sm">
+              <Switch checked={ruleDraft.active} onCheckedChange={(v) => setRuleDraft({ ...ruleDraft, active: v })} />
+              <span className="text-xs text-muted-foreground">Active</span>
+            </label>
+          </div>
+          <DialogFooter>
+            <button onClick={() => setRuleModal(false)} className="px-4 py-2 rounded-xl bg-muted text-sm font-medium">Cancel</button>
+            <button onClick={handleAddRule} disabled={!ruleDraft.trigger.trim() || !ruleDraft.referrerReward.trim()} className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50">
+              Add Rule
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 };
