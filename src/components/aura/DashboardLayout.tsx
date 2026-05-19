@@ -83,9 +83,9 @@ const navSections: NavSection[] = [
     title: "Visitor Services",
     defaultOpen: false,
     items: [
-      { icon: HelpCircle, label: "FAQs & Chat", path: "/microsite/faqs" },
-      { icon: Globe, label: "Community", path: "/destination/creators" },
-      { icon: Globe, label: "Social Links", path: "/microsite/social-links" },
+      { icon: HelpCircle, label: "FAQs & Chat", path: "/dashboard/modules/faqs" },
+      { icon: Globe, label: "Community", path: "/dashboard/modules/creators" },
+      { icon: Globe, label: "Social Links", path: "/dashboard/modules/socialLinks" },
     ],
   },
   {
