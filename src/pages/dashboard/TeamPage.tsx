@@ -4,6 +4,7 @@ import {
   UserPlus, Crown, Shield, User, Pencil, Trash2, X, Check,
   Mail, MapPin, ChevronRight, Users2,
 } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 
