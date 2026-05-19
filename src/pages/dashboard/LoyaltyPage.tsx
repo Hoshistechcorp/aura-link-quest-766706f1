@@ -109,8 +109,25 @@ const tierColor = (tier: string) => {
 
 const LoyaltyPage = () => {
   const [selectedTier, setSelectedTier] = useState("gold");
+  const [tierState, setTierState] = useState(tiers);
+  const [rewardModal, setRewardModal] = useState(false);
+  const [rewardDraft, setRewardDraft] = useState({ label: "", desc: "", iconName: "Star" });
 
-  const activeTier = tiers.find((t) => t.id === selectedTier)!;
+  const activeTier = tierState.find((t) => t.id === selectedTier)!;
+
+  const handleAddReward = () => {
+    if (!rewardDraft.label.trim()) return;
+    const iconEntry = rewardIconOptions.find((o) => o.name === rewardDraft.iconName) || rewardIconOptions[0];
+    setTierState((prev) => prev.map((t) =>
+      t.id === selectedTier
+        ? { ...t, rewards: [...t.rewards, { icon: iconEntry.icon, label: rewardDraft.label, desc: rewardDraft.desc }] }
+        : t
+    ));
+    setRewardModal(false);
+    setRewardDraft({ label: "", desc: "", iconName: "Star" });
+    toast({ title: "Reward added", description: `Added to ${activeTier.name} tier.` });
+  };
+
 
   return (
     <DashboardLayout title="Loyalty & Rewards" subtitle="Manage your loyalty program tiers">
