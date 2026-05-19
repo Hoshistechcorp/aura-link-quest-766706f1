@@ -156,7 +156,7 @@ const ReferralPage = () => {
       <div className="p-5 rounded-2xl bg-card border">
         <div className="flex items-center justify-between mb-5">
           <h3 className="font-display font-semibold">Reward Rules</h3>
-          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-muted text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors">
+          <button onClick={() => setRuleModal(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-muted text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors">
             <Plus className="w-3.5 h-3.5" />
             Add Rule
           </button>
