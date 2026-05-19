@@ -67,6 +67,7 @@ import EventPromotionPage from "./pages/dashboard/EventPromotionPage";
 import BusinessPromotionPage from "./pages/dashboard/BusinessPromotionPage";
 import TourismGamificationPage from "./pages/dashboard/TourismGamificationPage";
 import AnalyticsPage from "./pages/dashboard/AnalyticsPage";
+import ModuleManagerPage from "./pages/dashboard/ModuleManagerPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
