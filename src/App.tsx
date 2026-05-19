@@ -143,6 +143,7 @@ const App = () => (
             <Route path="/dashboard/tourism-gamification" element={<TourismGamificationPage />} />
             <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
             <Route path="/dashboard/ecosystem/:appId" element={<EcosystemPage />} />
+            <Route path="/dashboard/modules/:module" element={<ModuleManagerPage />} />
             <Route path="/destination/map" element={<GlobalMapPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
