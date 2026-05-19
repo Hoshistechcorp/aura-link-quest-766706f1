@@ -155,7 +155,7 @@ const LoyaltyPage = () => {
         <div className="lg:col-span-2">
           {/* Tier Selector */}
           <div className="flex gap-2 mb-5 overflow-x-auto no-scrollbar">
-            {tiers.map((tier) => (
+            {tierState.map((tier) => (
               <button
                 key={tier.id}
                 onClick={() => setSelectedTier(tier.id)}
