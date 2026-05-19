@@ -318,6 +318,59 @@ const LoyaltyPage = () => {
           </div>
         </div>
       </div>
+
+      <Dialog open={rewardModal} onOpenChange={setRewardModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Reward to {activeTier.name} Tier</DialogTitle>
+            <DialogDescription>Define a new perk members will receive at this tier.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Reward Name</label>
+              <input
+                value={rewardDraft.label}
+                onChange={(e) => setRewardDraft({ ...rewardDraft, label: e.target.value })}
+                placeholder="e.g. Free Dessert"
+                className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Description</label>
+              <input
+                value={rewardDraft.desc}
+                onChange={(e) => setRewardDraft({ ...rewardDraft, desc: e.target.value })}
+                placeholder="e.g. On your birthday month"
+                className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Icon</label>
+              <div className="flex gap-2 flex-wrap">
+                {rewardIconOptions.map((opt) => {
+                  const Ic = opt.icon;
+                  const sel = rewardDraft.iconName === opt.name;
+                  return (
+                    <button
+                      key={opt.name}
+                      onClick={() => setRewardDraft({ ...rewardDraft, iconName: opt.name })}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${sel ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
+                    >
+                      <Ic className="w-4 h-4" />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <button onClick={() => setRewardModal(false)} className="px-4 py-2 rounded-xl bg-muted text-sm font-medium">Cancel</button>
+            <button onClick={handleAddReward} disabled={!rewardDraft.label.trim()} className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50">
+              Add Reward
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 };
