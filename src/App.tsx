@@ -67,6 +67,7 @@ import EventPromotionPage from "./pages/dashboard/EventPromotionPage";
 import BusinessPromotionPage from "./pages/dashboard/BusinessPromotionPage";
 import TourismGamificationPage from "./pages/dashboard/TourismGamificationPage";
 import AnalyticsPage from "./pages/dashboard/AnalyticsPage";
+import ModuleManagerPage from "./pages/dashboard/ModuleManagerPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -142,6 +143,7 @@ const App = () => (
             <Route path="/dashboard/tourism-gamification" element={<TourismGamificationPage />} />
             <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
             <Route path="/dashboard/ecosystem/:appId" element={<EcosystemPage />} />
+            <Route path="/dashboard/modules/:module" element={<ModuleManagerPage />} />
             <Route path="/destination/map" element={<GlobalMapPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
