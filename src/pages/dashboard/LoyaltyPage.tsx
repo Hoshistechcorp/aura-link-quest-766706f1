@@ -5,7 +5,18 @@ import {
   Cake, UtensilsCrossed, Wine, Sparkles, Trophy, Target,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+
+const rewardIconOptions = [
+  { name: "Cake", icon: Cake },
+  { name: "UtensilsCrossed", icon: UtensilsCrossed },
+  { name: "Wine", icon: Wine },
+  { name: "Star", icon: Star },
+  { name: "Gift", icon: Gift },
+  { name: "Sparkles", icon: Sparkles },
+];
 
 const tiers = [
   {
