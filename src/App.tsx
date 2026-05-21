@@ -9,6 +9,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AuthPage from "./pages/AuthPage";
 import OnboardingPage from "./pages/OnboardingPage";
+import SignOutPage from "./pages/SignOutPage";
 import Index from "./pages/Index";
 import AccountTypeSelectorPage from "./pages/AccountTypeSelectorPage";
 import Microsite from "./pages/Microsite";
