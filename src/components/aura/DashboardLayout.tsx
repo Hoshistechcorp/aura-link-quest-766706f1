@@ -5,11 +5,14 @@ import {
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
   ClipboardEdit, MapPin, UserCog, Check, Globe, Landmark, CalendarDays, Store, Trophy,
   UtensilsCrossed, Hotel, Compass, Train, Palette, Wine, TreePine, Baby, Camera, HelpCircle,
+  LogOut,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "@/hooks/use-toast";
 
 interface NavItem {
   icon: LucideIcon;
@@ -186,6 +189,19 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
   const { isDark, toggle: toggleDark } = useDarkMode();
   const [activeLocation, setActiveLocation] = useState(locations[0]);
   const [locDropdownOpen, setLocDropdownOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const handleSignOut = () => {
+    signOut();
+    toast({ title: "Signed out", description: "See you soon." });
+    navigate("/auth", { replace: true });
+  };
+
+  const initials = (user?.name || user?.email || "?")
+    .split(/\s+|@/)[0]
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -198,12 +214,29 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
           <p className="text-[10px] text-muted-foreground mt-0.5">Operator Dashboard</p>
         </div>
         <SidebarNav currentPath={location.pathname} navigate={navigate} />
-        <div className="p-3 border-t">
+        <div className="p-3 border-t space-y-2">
+          {user && (
+            <div className="flex items-center gap-2 px-1">
+              <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-semibold">
+                {initials}
+              </div>
+              <div className="min-w-0">
+                <div className="text-xs font-medium truncate">{user.name}</div>
+                <div className="text-[10px] text-muted-foreground truncate">{user.email}</div>
+              </div>
+            </div>
+          )}
           <button
             onClick={() => navigate("/microsite")}
-            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            className="block text-xs text-muted-foreground hover:text-primary transition-colors"
           >
             ← View Public Page
+          </button>
+          <button
+            onClick={handleSignOut}
+            className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:bg-muted hover:text-destructive transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Sign out
           </button>
         </div>
       </aside>
@@ -219,14 +252,20 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
             <p className="text-[10px] text-muted-foreground mt-0.5">Operator Dashboard</p>
           </div>
           <SidebarNav currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
-          <div className="p-3 border-t">
-            <button
-              onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
-              className="text-xs text-muted-foreground hover:text-primary transition-colors"
-            >
-              ← View Public Page
-            </button>
-          </div>
+        <div className="p-3 border-t space-y-2">
+          <button
+            onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
+            className="block text-xs text-muted-foreground hover:text-primary transition-colors"
+          >
+            ← View Public Page
+          </button>
+          <button
+            onClick={() => { setMobileOpen(false); handleSignOut(); }}
+            className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:bg-muted hover:text-destructive transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Sign out
+          </button>
+        </div>
         </SheetContent>
       </Sheet>
 
@@ -292,6 +331,48 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
+              {/* User menu */}
+              {user && (
+                <div className="relative">
+                  <button
+                    onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-xl hover:bg-muted transition-colors"
+                    aria-label="Account menu"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[11px] font-semibold">
+                      {initials}
+                    </div>
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${userMenuOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {userMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        className="absolute right-0 top-full mt-1 w-56 p-1.5 rounded-xl bg-card border shadow-lg z-50"
+                      >
+                        <div className="px-3 py-2 border-b mb-1">
+                          <div className="text-sm font-medium truncate">{user.name}</div>
+                          <div className="text-[11px] text-muted-foreground truncate">{user.email}</div>
+                        </div>
+                        <button
+                          onClick={() => { navigate("/dashboard/settings"); setUserMenuOpen(false); }}
+                          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:bg-muted transition-colors"
+                        >
+                          <Settings className="w-3.5 h-3.5" /> Account settings
+                        </button>
+                        <button
+                          onClick={() => { setUserMenuOpen(false); handleSignOut(); }}
+                          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors"
+                        >
+                          <LogOut className="w-3.5 h-3.5" /> Sign out
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
             </div>
           </div>
           {children}

@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AccountTypeProvider } from "@/contexts/AccountTypeContext";
 import { MicrositeContentProvider } from "@/contexts/MicrositeContentContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import AuthPage from "./pages/AuthPage";
+import OnboardingPage from "./pages/OnboardingPage";
 import Index from "./pages/Index";
 import AccountTypeSelectorPage from "./pages/AccountTypeSelectorPage";
 import Microsite from "./pages/Microsite";
@@ -74,6 +78,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <AuthProvider>
     <AccountTypeProvider>
       <MicrositeContentProvider>
       <TooltipProvider>
@@ -118,32 +123,35 @@ const App = () => (
             <Route path="/destination/plan-trip" element={<PlanYourTripPage />} />
             <Route path="/destination/ai-planner" element={<AITripPlannerPage />} />
             <Route path="/destination/sustainability" element={<SustainabilityPage />} />
-            {/* Dashboard */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/qr" element={<QRManagement />} />
-            <Route path="/dashboard/affiliates" element={<AffiliateDashboard />} />
-            <Route path="/dashboard/subscription" element={<SubscriptionPage />} />
-            <Route path="/dashboard/influencers" element={<InfluencerPage />} />
-            <Route path="/dashboard/loyalty" element={<LoyaltyPage />} />
-            <Route path="/dashboard/referrals" element={<ReferralPage />} />
-            <Route path="/dashboard/seo" element={<SEOPage />} />
-            <Route path="/dashboard/reputation" element={<ReputationPage />} />
-            <Route path="/dashboard/enterprise" element={<EnterprisePage />} />
-            <Route path="/dashboard/settings" element={<SettingsPage />} />
-            <Route path="/dashboard/admin" element={<AdminPage />} />
-            <Route path="/dashboard/gamification" element={<GamificationPage />} />
-            <Route path="/dashboard/cards" element={<CardStudioPage />} />
-            <Route path="/dashboard/locations" element={<LocationsPage />} />
-            <Route path="/dashboard/team" element={<TeamPage />} />
-            <Route path="/dashboard/tourism" element={<TourismDashboardPage />} />
-            <Route path="/dashboard/destination-cards" element={<DestinationCardStudioPage />} />
-            <Route path="/dashboard/sponsored-attractions" element={<SponsoredAttractionsPage />} />
-            <Route path="/dashboard/event-promotion" element={<EventPromotionPage />} />
-            <Route path="/dashboard/business-promotion" element={<BusinessPromotionPage />} />
-            <Route path="/dashboard/tourism-gamification" element={<TourismGamificationPage />} />
-            <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
-            <Route path="/dashboard/ecosystem/:appId" element={<EcosystemPage />} />
-            <Route path="/dashboard/modules/:module" element={<ModuleManagerPage />} />
+            {/* Auth + onboarding */}
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/onboarding" element={<ProtectedRoute requireOnboarded={false}><OnboardingPage /></ProtectedRoute>} />
+            {/* Dashboard (protected) */}
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/qr" element={<ProtectedRoute><QRManagement /></ProtectedRoute>} />
+            <Route path="/dashboard/affiliates" element={<ProtectedRoute><AffiliateDashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/subscription" element={<ProtectedRoute><SubscriptionPage /></ProtectedRoute>} />
+            <Route path="/dashboard/influencers" element={<ProtectedRoute><InfluencerPage /></ProtectedRoute>} />
+            <Route path="/dashboard/loyalty" element={<ProtectedRoute><LoyaltyPage /></ProtectedRoute>} />
+            <Route path="/dashboard/referrals" element={<ProtectedRoute><ReferralPage /></ProtectedRoute>} />
+            <Route path="/dashboard/seo" element={<ProtectedRoute><SEOPage /></ProtectedRoute>} />
+            <Route path="/dashboard/reputation" element={<ProtectedRoute><ReputationPage /></ProtectedRoute>} />
+            <Route path="/dashboard/enterprise" element={<ProtectedRoute><EnterprisePage /></ProtectedRoute>} />
+            <Route path="/dashboard/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+            <Route path="/dashboard/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
+            <Route path="/dashboard/gamification" element={<ProtectedRoute><GamificationPage /></ProtectedRoute>} />
+            <Route path="/dashboard/cards" element={<ProtectedRoute><CardStudioPage /></ProtectedRoute>} />
+            <Route path="/dashboard/locations" element={<ProtectedRoute><LocationsPage /></ProtectedRoute>} />
+            <Route path="/dashboard/team" element={<ProtectedRoute><TeamPage /></ProtectedRoute>} />
+            <Route path="/dashboard/tourism" element={<ProtectedRoute><TourismDashboardPage /></ProtectedRoute>} />
+            <Route path="/dashboard/destination-cards" element={<ProtectedRoute><DestinationCardStudioPage /></ProtectedRoute>} />
+            <Route path="/dashboard/sponsored-attractions" element={<ProtectedRoute><SponsoredAttractionsPage /></ProtectedRoute>} />
+            <Route path="/dashboard/event-promotion" element={<ProtectedRoute><EventPromotionPage /></ProtectedRoute>} />
+            <Route path="/dashboard/business-promotion" element={<ProtectedRoute><BusinessPromotionPage /></ProtectedRoute>} />
+            <Route path="/dashboard/tourism-gamification" element={<ProtectedRoute><TourismGamificationPage /></ProtectedRoute>} />
+            <Route path="/dashboard/analytics" element={<ProtectedRoute><AnalyticsPage /></ProtectedRoute>} />
+            <Route path="/dashboard/ecosystem/:appId" element={<ProtectedRoute><EcosystemPage /></ProtectedRoute>} />
+            <Route path="/dashboard/modules/:module" element={<ProtectedRoute><ModuleManagerPage /></ProtectedRoute>} />
             <Route path="/destination/map" element={<GlobalMapPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -151,6 +159,7 @@ const App = () => (
       </TooltipProvider>
       </MicrositeContentProvider>
     </AccountTypeProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
