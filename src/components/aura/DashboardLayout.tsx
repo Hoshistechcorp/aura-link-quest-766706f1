@@ -252,14 +252,20 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
             <p className="text-[10px] text-muted-foreground mt-0.5">Operator Dashboard</p>
           </div>
           <SidebarNav currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
-          <div className="p-3 border-t">
-            <button
-              onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
-              className="text-xs text-muted-foreground hover:text-primary transition-colors"
-            >
-              ← View Public Page
-            </button>
-          </div>
+        <div className="p-3 border-t space-y-2">
+          <button
+            onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
+            className="block text-xs text-muted-foreground hover:text-primary transition-colors"
+          >
+            ← View Public Page
+          </button>
+          <button
+            onClick={() => { setMobileOpen(false); handleSignOut(); }}
+            className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:bg-muted hover:text-destructive transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Sign out
+          </button>
+        </div>
         </SheetContent>
       </Sheet>
 
