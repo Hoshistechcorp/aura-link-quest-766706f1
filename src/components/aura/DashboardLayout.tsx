@@ -189,6 +189,19 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
   const { isDark, toggle: toggleDark } = useDarkMode();
   const [activeLocation, setActiveLocation] = useState(locations[0]);
   const [locDropdownOpen, setLocDropdownOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const handleSignOut = () => {
+    signOut();
+    toast({ title: "Signed out", description: "See you soon." });
+    navigate("/auth", { replace: true });
+  };
+
+  const initials = (user?.name || user?.email || "?")
+    .split(/\s+|@/)[0]
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <div className="min-h-screen bg-background flex">
