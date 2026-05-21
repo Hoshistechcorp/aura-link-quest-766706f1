@@ -5,11 +5,14 @@ import {
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
   ClipboardEdit, MapPin, UserCog, Check, Globe, Landmark, CalendarDays, Store, Trophy,
   UtensilsCrossed, Hotel, Compass, Train, Palette, Wine, TreePine, Baby, Camera, HelpCircle,
+  LogOut,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "@/hooks/use-toast";
 
 interface NavItem {
   icon: LucideIcon;
