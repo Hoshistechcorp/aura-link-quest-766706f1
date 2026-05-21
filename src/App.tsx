@@ -9,6 +9,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AuthPage from "./pages/AuthPage";
 import OnboardingPage from "./pages/OnboardingPage";
+import SignOutPage from "./pages/SignOutPage";
 import Index from "./pages/Index";
 import AccountTypeSelectorPage from "./pages/AccountTypeSelectorPage";
 import Microsite from "./pages/Microsite";
@@ -125,6 +126,7 @@ const App = () => (
             <Route path="/destination/sustainability" element={<SustainabilityPage />} />
             {/* Auth + onboarding */}
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/signout" element={<SignOutPage />} />
             <Route path="/onboarding" element={<ProtectedRoute requireOnboarded={false}><OnboardingPage /></ProtectedRoute>} />
             {/* Dashboard (protected) */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

@@ -12,7 +12,7 @@ import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
 import { useAuth } from "@/contexts/AuthContext";
-import { toast } from "@/hooks/use-toast";
+
 
 interface NavItem {
   icon: LucideIcon;
@@ -194,8 +194,7 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
 
   const handleSignOut = () => {
     signOut();
-    toast({ title: "Signed out", description: "See you soon." });
-    navigate("/auth", { replace: true });
+    navigate("/signout", { replace: true });
   };
 
   const initials = (user?.name || user?.email || "?")
