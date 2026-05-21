@@ -126,6 +126,7 @@ const App = () => (
             <Route path="/destination/sustainability" element={<SustainabilityPage />} />
             {/* Auth + onboarding */}
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/signout" element={<SignOutPage />} />
             <Route path="/onboarding" element={<ProtectedRoute requireOnboarded={false}><OnboardingPage /></ProtectedRoute>} />
             {/* Dashboard (protected) */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
