@@ -331,6 +331,48 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
+              {/* User menu */}
+              {user && (
+                <div className="relative">
+                  <button
+                    onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-xl hover:bg-muted transition-colors"
+                    aria-label="Account menu"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[11px] font-semibold">
+                      {initials}
+                    </div>
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${userMenuOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {userMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        className="absolute right-0 top-full mt-1 w-56 p-1.5 rounded-xl bg-card border shadow-lg z-50"
+                      >
+                        <div className="px-3 py-2 border-b mb-1">
+                          <div className="text-sm font-medium truncate">{user.name}</div>
+                          <div className="text-[11px] text-muted-foreground truncate">{user.email}</div>
+                        </div>
+                        <button
+                          onClick={() => { navigate("/dashboard/settings"); setUserMenuOpen(false); }}
+                          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:bg-muted transition-colors"
+                        >
+                          <Settings className="w-3.5 h-3.5" /> Account settings
+                        </button>
+                        <button
+                          onClick={() => { setUserMenuOpen(false); handleSignOut(); }}
+                          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors"
+                        >
+                          <LogOut className="w-3.5 h-3.5" /> Sign out
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
             </div>
           </div>
           {children}
