@@ -214,12 +214,29 @@ const DashboardLayout = ({ children, title, subtitle = "Meridian Tours · Tour O
           <p className="text-[10px] text-muted-foreground mt-0.5">Operator Dashboard</p>
         </div>
         <SidebarNav currentPath={location.pathname} navigate={navigate} />
-        <div className="p-3 border-t">
+        <div className="p-3 border-t space-y-2">
+          {user && (
+            <div className="flex items-center gap-2 px-1">
+              <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-semibold">
+                {initials}
+              </div>
+              <div className="min-w-0">
+                <div className="text-xs font-medium truncate">{user.name}</div>
+                <div className="text-[10px] text-muted-foreground truncate">{user.email}</div>
+              </div>
+            </div>
+          )}
           <button
             onClick={() => navigate("/microsite")}
-            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            className="block text-xs text-muted-foreground hover:text-primary transition-colors"
           >
             ← View Public Page
+          </button>
+          <button
+            onClick={handleSignOut}
+            className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:bg-muted hover:text-destructive transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Sign out
           </button>
         </div>
       </aside>
