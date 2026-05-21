@@ -1,9 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Smartphone, LayoutDashboard, Globe, MapPin } from "lucide-react";
+import { Smartphone, LayoutDashboard, Globe, MapPin, LogIn, UserPlus } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const goDashboard = () => {
+    if (!user) navigate("/auth", { state: { mode: "signin" } });
+    else if (!user.onboarded) navigate("/onboarding");
+    else navigate("/dashboard");
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4">
@@ -34,13 +42,35 @@ const Index = () => {
             Explore Destination
           </button>
           <button
-            onClick={() => navigate("/dashboard")}
+            onClick={goDashboard}
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-card border font-medium text-sm hover:bg-muted transition-colors"
           >
             <LayoutDashboard className="w-4 h-4" />
             Operator Dashboard
           </button>
         </div>
+
+        {!user ? (
+          <div className="flex items-center justify-center gap-4 mt-6 text-xs">
+            <button
+              onClick={() => navigate("/auth", { state: { mode: "signin" } })}
+              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+            >
+              <LogIn className="w-3.5 h-3.5" /> Sign in
+            </button>
+            <span className="text-muted-foreground/40">·</span>
+            <button
+              onClick={() => navigate("/auth", { state: { mode: "signup" } })}
+              className="flex items-center gap-1.5 text-primary hover:underline font-medium"
+            >
+              <UserPlus className="w-3.5 h-3.5" /> Create account
+            </button>
+          </div>
+        ) : (
+          <p className="mt-6 text-xs text-muted-foreground">
+            Signed in as <span className="font-medium text-foreground">{user.email}</span>
+          </p>
+        )}
       </motion.div>
     </div>
   );
